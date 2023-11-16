@@ -1,0 +1,38 @@
+{% extends 'index.html'%}
+{% block title %}Notification
+{% endblock %}
+{% block jobseeker %}{{applicant_name}}{% endblock %}
+{% block body %}
+<h2 class="text-center">Job Opportunities</h2>
+        <div class="input-group">
+            <form method="GET">
+                <input type="search" class="form-control rounded" placeholder="Search" name="q" aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="btn bg-dark text-white">search</button>
+
+
+            </form>
+
+
+        </div>
+<br>
+<table class="table table-dark table-striped" >
+            <thead >
+              <tr>
+                  <th class="text-center">JOB TITLE</th>
+                  <th class="text-center">JOB DESCRIPTION</th>
+                  <th class="text-center">APPLICATION END</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for jobs in job_list %}
+                <tr>
+                    <td><a href="applicationform/{{jobs.id}}" STYLE="text-decoration: none;">{{jobs.job_title}}</a></td>
+                    <td>{{jobs.job_description}}<br>Location:{{jobs.job_location}}<br>Experience:{{jobs.job_experience}}<br>Salary:{{jobs.job_salary}}<br>Job Posting Date:{{jobs.job_posting_date}}</td>
+                    <td>{{jobs.job_closing}}</td>
+
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'hr_index.html'%}
+{% block title %}job posting
+{% endblock %}
+{% block compy %}{{data}}{% endblock %}
+{% block body %}
+<div class="container mt-5 mb-5 col-sm-9">
+    <div class="row">
+        <div class="col-sm-11 bg-secondary text-white p-3">
+            <h2 class="text-center">Job Opportunities</h2>
+            <h6 class="text-center">Please enter all relevant  information in the fields below.</h6>
+
+            <form  method="POST">
+                {% csrf_token %}
+                <div class="mb-3 mt-3 ">
+                    <label for="companyname1">Company Name:</label>
+                    <input type="text" class="form-control" id="companyname1" value="{{data}}" disabled="true" name="companyname">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="jobtitle1">Job Title:</label>
+                    <input type="text" class="form-control" id="jobtitle1" placeholder="Enter Job Position" name="jobtitle">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="jd1">Job Description:</label>
+                    <textarea class="form-control" rows="10" id="jd1" name="jd"></textarea>
+
+                </div>
+                <div class="mb-3 mt-3 ">
+                    <label for="location1">Location:</label>
+                    <input type="text" class="form-control" id="location1" placeholder="Enter Location" name="location">
+                </div>
+                <div class="mb-3 mt-3 ">
+                    <label for="salary1">Salary:</label>
+                    <input type="text" class="form-control" id="salary1" placeholder="Enter the Salary" name="salary1">
+                </div>
+                <div class="mb-3 mt-3 ">
+                    <label for="exp1">Experience:</label>
+                    <input type="text" class="form-control" id="exp1" placeholder="Enter Experience Requirements" name="exp">
+                </div>
+                <div class="mb-3 mt-3 ">
+                    <label for="postingdate1">Job Posting Date:</label>
+                    <input type="date" class="form-control" id="postingdate1" placeholder="Job Posting Date" name="postingdate">
+                </div>
+                <div class="mb-3 mt-3 ">
+                    <label for="closingdate1">Application Closing Date:</label>
+                    <input type="date" class="form-control" id="closingdate1" placeholder="Enter the last date for applying" name="closingdate">
+                </div>
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

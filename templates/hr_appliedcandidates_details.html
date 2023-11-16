@@ -1,0 +1,33 @@
+{% extends 'hr_index.html'%}
+{% block title %}applied_candidate_history
+{% endblock %}
+{% block compy %}{{data1}}{% endblock %}
+{% block body %}
+<h2 class="text-center">JOB APPLICANTS HISTORY</h2>
+<table class="table table-dark table-striped " >
+            <thead >
+              <tr>
+                  <th class="text-center">APPLICANT NAME</th>
+                  <th class="text-center">EMAIL</th>
+                  <th class="text-center">CONTACT</th>
+                  <th class="text-center">EXPERIENCE</th>
+                  <th class="text-center">RESUME</th>
+                  <th class="text-center">STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for k in applied_job_seeker_history %}
+                <tr>
+                    <td class="text-center">{{k.applicant_id.name}}</td>
+                    <td class="text-center">{{k.applicant_id.email}}</td>
+                    <td class="text-center">{{k.applicant_id.contact}}</td>
+                    <td class="text-center">{{k.experience}}</td>
+                    <td class="text-center"><a href="/hr/download-pdf/{{k.id}}">Download resume</a></td>
+
+                    <td class="text-center">PENDING</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+</table>
+{% endblock %}

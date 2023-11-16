@@ -1,0 +1,29 @@
+{% extends 'hr_index.html'%}
+{% block title %}my_job_post_history
+{% endblock %}
+{% block compy %}{{data1}}{% endblock %}
+{% block body %}
+<h2 class="text-center">JOB POSTING HISTORY</h2>
+<table class="table table-dark table-striped " >
+            <thead >
+              <tr>
+                  <th class="text-center">JOB ID</th>
+                  <th class="text-center">JOB TITLE</th>
+                  <th class="text-center">JOB POST ON</th>
+                  <th class="text-center"></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for w in my_history %}
+                <tr>
+                    <td class="text-center">{{w.id}}</td>
+                    <td class="text-center">{{w.job_title}}</td>
+                    <td class="text-center">{{w.job_posting_date}}</td>
+                    <td>
+                        <a href="applied_candidate_info/{{w.id}}" class="btn btn-info align-center" href="">APPLIED CANDIDATES</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+</table>
+{% endblock %}
