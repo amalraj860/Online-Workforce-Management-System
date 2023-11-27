@@ -1,0 +1,28 @@
+{% extends 'admin_index.html'%}
+{% block title %}admin_jobseeker_jobview
+{% endblock %}
+{% block subtitle %}Job Seeker{% endblock %}
+{% block body %}
+<h2 class="text-center">APPLICATION HISTORY</h2>
+{% for x in applicant%}
+<span>{{x.name}}</span>
+{% endfor %}
+<table class="table table-dark table-striped " >
+            <thead >
+              <tr>
+                  <th class="text-center">COMPANY NAME</th>
+                  <th class="text-center">JOB POST</th>
+                  <th class="text-center">APPLIED ON</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for x in application_data %}
+                <tr>
+                    <td class="text-center">{{x.job_details_id.company_id.company_name}}</td>
+                    <td class="text-center">{{x.job_details_id.job_title}}</td>
+                    <td class="text-center">{{x.date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+</table>
+{% endblock %}

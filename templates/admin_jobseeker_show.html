@@ -1,0 +1,41 @@
+{% extends 'admin_index.html'%}
+{% block title %}admin_jobseeker_show
+{% endblock %}
+{% block subtitle %}Job Seeker{% endblock %}
+{% block body %}
+<div class="container mt-3">
+  <h2>Candidate Details</h2>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Password</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for candidates_dtls in candidate %}
+      <tr>
+        <td>{{candidates_dtls.id}}</td>
+        <td>{{candidates_dtls.name }}</td>
+        <td>{{candidates_dtls.address}}</td>
+        <td>{{candidates_dtls.city}}</td>
+        <td>{{candidates_dtls.email}}</td>
+        <td>{{candidates_dtls.contact}}</td>
+        <td>{{candidates_dtls.password}}</td>
+        <td>
+          <a href="update/{{candidates_dtls.id}}" class="btn btn-success">UPDATE</a>
+          <a href="jobview/{{candidates_dtls.id}}"v class="btn btn-success">VIEW</a>
+          <a href="delete/{{candidates_dtls.id}}" class="btn btn-danger">DELETE</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

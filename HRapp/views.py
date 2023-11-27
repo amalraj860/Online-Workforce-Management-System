@@ -144,7 +144,7 @@ def view_the_applied_candidate_fn(requests, id):
 
 # HR profile updation
 
-def hr_profile_updation_fn(requests):
+def hr_profile_updation_fn(requests,id):
     if 'hr_id' in requests.session:
         company_email = requests.session['hr_id']
         data = company_signup.objects.filter(company_email=company_email)
@@ -152,7 +152,7 @@ def hr_profile_updation_fn(requests):
             a = x.company_name
             Id = x.id
         if requests.method == "POST":
-            company_info = company_signup.objects.get(id=Id)
+            company_info = company_signup.objects.get(id=id)
             company_info.company_name = requests.POST.get("companyname")
             company_info.company_address = requests.POST.get("companyaddress")
             company_info.company_email = requests.POST.get("companyemail")

@@ -3,6 +3,17 @@ from . import views
 urlpatterns = [
     path('/login',views.admin_login_fn,name='admin_login'),
     path('',views.admin_home_fn),
-    path('logouthr',views.admin_logout,name='logout_admin'),
+    path('admin/jobseeker',views.admin_jobseeker_home_fn,name='admin_job_seeker_home'),
+    path('admin/hr', views.admin_hr_home_fn, name='admin_hr_home'),
+    path('jobseeker/signup', views.admin_jobseeker_add_fn, name='admin_jobseeker_signup'),
+    path('hr/signup', views.admin_hr_add_fn, name='admin_hr_signup'),
+    path('/show', views.admin_jobseeker_show_fn,name='jobseeker_show'),
+    path('/update/<str:id>', views.admin_jobseeker_update_fn, name="update_jobseeker"),
+    path('/delete/<str:id>', views.admin_jobseeker_delete_fn, name="delete_jobseeker"),
+    path('/jobview/<str:id>',views.admin_jobseeker_jobview_fn,name='job_view'),
+    path('/hr_show',views.admin_hr_show_fn,name='hr_show'),
+    path('/hr_update/<str:id>', views.admin_hr_update_fn, name="update_hr"),
+
+    path('logoutadmin',views.admin_logout,name='logout_admin'),
 
 ]

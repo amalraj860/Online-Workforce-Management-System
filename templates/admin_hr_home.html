@@ -1,0 +1,35 @@
+{% extends 'admin_index.html'%}
+{% block title %}admin_hr_home
+{% endblock %}
+{% block subtitle %}RECRUITER{% endblock %}
+{% block body %}
+         <div class="row">
+            <div class="col-sm-4 text-lg-center">
+              <div class="card">
+                <div class="card-body bg-secondary bg-gradient  text-light">
+                  <h5 class="card-title  font-weight-bold">ADD NEW RECRUITER</h5>
+                  <p class="card-text">This includes features or functionalities tailored to individuals looking for jobs.</p>
+                  <a href="{% url 'admin_hr_signup'  %}" class="btn btn-primary ">View Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 text-lg-center">
+              <div class="card">
+                <div class="card-body bg-secondary bg-gradient  text-light">
+                  <h5 class="card-title  font-weight-bold">UPDATE</h5>
+                  <p class="card-text">This could include features such as posting job listings & managing applicants.</p>
+                  <a href="{% url 'hr_show' %}" class="btn btn-primary">View Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 text-lg-center">
+                <div class="card">
+                  <div class="card-body bg-secondary bg-gradient  text-light">
+                    <h5 class="card-title  font-weight-bold">REPORT</h5>
+                    <p class="card-text">This could include features such as posting job listings & managing applicants.</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 # Create your models here.
 class company_signup(models.Model):
     company_name = models.CharField(max_length=50)

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>{% block title%}{% endblock %}</title>
+  {% load static %}
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -82,38 +83,10 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
+          <h1 class="h2">{% block subtitle %}{% endblock %}</h1>
         </div>
-       <!-- cards for job seeker and recruiter -->
-        <div class="row">
-            <div class="col-sm-6 text-lg-center">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title  font-weight-bold">JOB SEEKER</h5>
-                  <p class="card-text">This includes features or functionalities tailored to individuals looking for jobs.</p>
-                  <a href="{% url 'admin_job_seeker_home' %}" class="btn btn-primary ">View Details</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 text-lg-center">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title  font-weight-bold">RECRUITER</h5>
-                  <p class="card-text">This could include features such as posting job listings & managing applicants.</p>
-                  <a href="{% url 'admin_hr_home' %}" class="btn btn-primary">View Details</a>
-                </div>
-              </div>
-            </div>
-        </div>
+         {% block body%}{% endblock %}
 
-        <div class="row">
-          <div class="col-md-6 ">
-            <!-- Colorful chart or graph -->
-          </div>
-          <div class="col-md-6 ">
-            <!-- Table content -->
-          </div>
-        </div>
 
       </main>
     </div>
