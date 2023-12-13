@@ -7,6 +7,11 @@
   {% load static %}
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <!--icon  -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <style>
     /* Custom styles */
     body {
@@ -91,6 +96,74 @@
       </main>
     </div>
   </div>
+  <script>
+ <!--  script for admin graph-->
+ <!--  create a JavaScript object by parsing a JSON string-->
+  var Values = JSON.parse("{{data|escapejs}}");
+  console.log(xValues)
+
+  var xValues = Values.company_names;
+  console.log(xValues)
+  var yValues = Values.job_counts;
+  console.log(yValues)
+  var barColors = "gray";
+  new Chart("myChart", {
+    type: "bar",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Job count for each company"
+    }
+  }
+});
+</script>
+<!--  <script>-->
+<!--        // Retrieve data passed from Django view-->
+<!--        var companyNames = {{ company_names | safe }};-->
+<!--        var jobCounts = {{ job_counts | safe }};-->
+
+<!--        // Create a bar chart using Chart.js-->
+<!--        var ctx = document.getElementById('jobCountChart').getContext('2d');-->
+<!--        var jobCountChart = new Chart(ctx, {-->
+<!--            type: 'bar',-->
+<!--            data: {-->
+<!--                labels: companyNames,-->
+<!--                datasets: [{-->
+<!--                    label: 'Job Count',-->
+<!--                    data: jobCounts,-->
+<!--                    backgroundColor: 'skyblue',-->
+<!--                    borderWidth: 1-->
+<!--                }]-->
+<!--            },-->
+<!--            options: {-->
+<!--                responsive: true,-->
+<!--                scales: {-->
+<!--                    y: {-->
+<!--                        beginAtZero: true,-->
+<!--                        title: {-->
+<!--                            display: true,-->
+<!--                            text: 'Job Count'-->
+<!--                        }-->
+<!--                    },-->
+<!--                    x: {-->
+<!--                        title: {-->
+<!--                            display: true,-->
+<!--                            text: 'Companies'-->
+<!--                        }-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--  </script>-->
+
 
   <!-- Bootstrap JS and dependencies -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

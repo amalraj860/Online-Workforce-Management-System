@@ -1,0 +1,32 @@
+{% extends 'admin_index.html'%}
+{% block title %}admin_hr_jobview
+{% endblock %}
+{% block subtitle %}RECRUITER{% endblock %}
+{% block body %}
+<h2 class="text-center">JOB POSTING HISTORY</h2>
+{% for x in recruiter %}
+<span>{{x.company_name}}</span>
+{% endfor %}
+<table class="table table-dark table-striped " >
+            <thead >
+              <tr>
+                  <th class="text-center">JOB ID</th>
+                  <th class="text-center">JOOB TITLE</th>
+                  <th class="text-center">POSTED ON</th>
+                  <th class="text_center">APPLIED CANDIDATES</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for x in hr_jobs %}
+                <tr>
+                    <td class="text-center">{{x.id}}</td>
+                    <td class="text-center">{{x.job_title}}</td>
+                    <td class="text-center">{{x.job_posting_date}}</td>
+                    <td><a href='/super_user/admin_job_candidate/{{x.id}}' class="btn btn-primary ">View</a></td>
+
+
+                </tr>
+                {% endfor %}
+            </tbody>
+</table>
+{% endblock %}

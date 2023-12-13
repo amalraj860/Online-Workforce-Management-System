@@ -6,6 +6,9 @@
   <title>Admin Dashboard</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!--Bootstrap icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     /* Custom styles */
     body {
@@ -73,7 +76,7 @@
       <nav class="col-md-2 d-none d-md-block sidebar">
         <!-- Sidebar content -->
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">Admin Dashboard</a>
+            <a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action">Admin Dashboard</a>
             <a href="{% url 'admin_job_seeker_home' %}" class="list-group-item list-group-item-action">Job Seeker</a>
             <a href="{% url 'admin_hr_home' %}" class="list-group-item list-group-item-action">Recruiter</a>
 

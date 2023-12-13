@@ -13,7 +13,10 @@ urlpatterns = [
     path('/jobview/<str:id>',views.admin_jobseeker_jobview_fn,name='job_view'),
     path('/hr_show',views.admin_hr_show_fn,name='hr_show'),
     path('/hr_update/<str:id>', views.admin_hr_update_fn, name="update_hr"),
-
+    path('/job_posting/<str:id>',views.admin_hr_jobposting_details_fn,name='hr_job_view'),
+    path('/admin_job_candidate/<str:id>', views.admin_hr_job_candidate_details_fn, name='candidate_dtls'),
+    path('/hr_delete/<str:id>', views.admin_hr_delete_fn, name="delete_hr"),
+    path('/dashboard',views.admin_jobseeker_count_fn,name="dashboard"),
     path('logoutadmin',views.admin_logout,name='logout_admin'),
 
 ]

@@ -9,6 +9,7 @@ class class_applicant_signup(models.Model):
     email = models.EmailField(max_length=30)
     contact = models.CharField(max_length=20)
     password = models.CharField(max_length=25)
+    status = models.CharField(max_length=50,null=True,default="Active")
 
     class Meta:
         db_table = 'job_seeker_details'

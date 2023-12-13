@@ -3,34 +3,30 @@
 {% endblock %}
 {% block subtitle %}RECRUITER{% endblock %}
 {% block body %}
-<div class="col-sm-8 bg-secondary text-white p-5">
-            <h2>Sign Up</h2>
-            <h6>Please enter all relevant  information in the fields below.</h6>
+<div class="col-sm-8   p-5">
+            <h2 class="text-center">PROFILE UPDATE</h2>
+
             <form  method="POST">
                 {% csrf_token %}
                 {% for hr_update in hr_updates %}
                 <div class="mb-3 mt-3 ">
                     <label for="companyname1">Company Name:</label>
-                    <input type="text" class="form-control" id="companyname1" value="{{hr_update.company_name}}" name="companyname">
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="companyaddress1">Address:</label>
-                    <input class="form-control" rows="5" id="companyaddress1" name="companyaddress" value="{{hr_update.company_address}}">
+                    <input type="text" class="form-control" id="companyname1" value="{{hr_update.company_name}}" disabled="true" name="companyname">
                 </div>
                 <div class="mb-3 mt-3 ">
                     <label for="companyemail1">Email:</label>
-                    <input type="email" class="form-control" id="companyemail1" value="{{hr_update.company_email}}" name="companyemail">
+                    <input type="email" class="form-control" id="companyemail1" value="{{hr_update.company_email}}" disabled="true" name="companyemail">
                 </div>
                 <div class="mb-3 mt-3 ">
                     <label for="companycontact">Contact Number:</label>
-                    <input type="tel" class="form-control" id="companycontact" value="{{hr_update.company_contact}}" name="companycontactnumber">
+                    <input type="tel" class="form-control" id="companycontact" value="{{hr_update.company_contact}}" disabled="true" name="companycontactnumber">
                 </div>
                 <div class="mb-3 mt-3 ">
-                    <label for="psw">Password:</label>
-                    <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="{{hr_update.company_password}}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                    <label for="status1">Status:</label>
+                    <input type="text" id="status1" name="status"  value="{{hr_update.status}}"  >
                 </div>
                 <button type="submit" class="btn btn-danger">Submit</button>
                 {% endfor %}
             </form>
-        </div>
+</div>
 {% endblock %}

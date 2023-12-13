@@ -6,40 +6,26 @@
 <div class="container mt-5 mb-5 col-sm-10">
     <div class="row">
         <div class="col-sm-10  p-2 ">
-            <h2 class="text-center">UPDATE YOUR PROFILE</h2>
+            <h2 class="text-center">PROFILE UPDATE</h2>
 
             <form  method="POST">
                 {% csrf_token %}
                 {% for applicant_update in applicant_updates %}
                 <div class="mb-3 mt-3 ">
                     <label for="name1">Name:</label>
-                    <input type="text" class="form-control" id="name1" value="{{applicant_update.name}}" name="name">
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="address1">Address:</label>
-                    <input type="text" class="form-control"  id="address1" value="{{applicant_update.address}}" name="address">
-                </div>
-
-
-                <div class="mb-3 mt-3">
-                    <label for="city1">City:</label>
-                    <input type="text" class="form-control"  id="city1" value="{{applicant_update.city}}" name="city">
+                    <input type="text" class="form-control" id="name1" placeholder="{{applicant_update.name}}" disabled="true" name="name">
                 </div>
                 <div class="mb-3 mt-3 ">
                     <label for="email1">Email:</label>
-                    <input type="email" class="form-control" id="email1" value="{{applicant_update.email}}" disabled="true" name="email">
+                    <input type="email" class="form-control" id="email1" placeholder="{{applicant_update.email}}" disabled="true" name="email">
                 </div>
                 <div class="mb-3 mt-3 ">
                     <label for="contact">Contact Number:</label>
-                    <input type="tel" class="form-control" id="contact" value="{{applicant_update.contact}}" name="contactnumber">
+                    <input type="tel" class="form-control" id="contact" placeholder="{{applicant_update.contact}}" disabled="true" name="contactnumber">
                 </div>
                 <div class="mb-3 mt-3 ">
-                    <label for="psw">Password:</label>
-                    <input type="password" id="psw" name="psw"  value="{{applicant_update.password }}" required>
-                </div>
-                <div class="mb-3 mt-3 ">
-                    <label for="psw1">Confirm Password:</label>
-                    <input type="password" id="psw1" name="psw1">
+                    <label for="status">Status:</label>
+                    <input type="text" id="status" name="status"  value="{{applicant_update.status }}" required>
                 </div>
                 <button type="submit" class="btn btn-danger">Submit</button>
                 {% endfor %}

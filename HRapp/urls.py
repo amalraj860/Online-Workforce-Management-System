@@ -10,7 +10,7 @@ urlpatterns = [
     path('contactshr',views.hr_contactus,name='contacts_hr'),
     path('signup_hr',views.hr_signup,name='signup_hr'),
     path('hr_job_post_history',views.hr_job_history_fn,name='hr_job_History'),
-    path('hr_update_profile',views.hr_profile_updation_fn,name='hr_updates_profile'),
+    path('hr_update_profile/',views.hr_profile_updation_fn,name='hr_updates_profile'),
     path('applied_candidate_info/<int:id>',views.view_the_applied_candidate_fn, name='applied_candidate_info'),
     path('download-pdf/<str:id>', views.download_pdf, name='download_pdf'),
 ]

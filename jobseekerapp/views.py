@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect,HttpResponse
 from .models import class_applicant_signup, application_form
 from HRapp.models import company_signup,job_posting
 from django.db.models import Q #import django query set
+from datetime import date
+import random
+from django.core.mail import send_mail
+from twilio.rest import Client
+from django.conf import settings
 # from django.http import HttpResponse
 
 
@@ -27,6 +32,67 @@ def display(request):
 #             print("user not exists")
 #     return render(requests,"main_page.html")
 
+
+# forgot password function
+def generate_otp():
+    return str(random.randint(1000, 9999))  # Generate a random 4-digit OTP
+
+def send_otp_via_sms(phone_number, otp):
+    account_sid = settings.TWILIO_ACCOUNT_SID
+    auth_token = settings.TWILIO_AUTH_TOKEN
+    twilio_phone_number = settings.TWILIO_PHONE_NUMBER
+
+    client = Client(account_sid, auth_token)
+
+    try:
+        message = client.messages.create(
+            body=f'Your OTP is: {otp}',
+            from_=str(twilio_phone_number),
+            to=str(phone_number)
+        )
+        return True, message.sid  # Return success and message SID if sent successfully
+    except Exception as e:
+        return False, str(e)  # Return failure and error message
+    # # Code to send OTP via SMS to the given phone number
+    # # You might use a third-party SMS service or an API here
+    # # pass
+
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+
+        # Check if the email and phone number exist in your database for both models
+        try:
+            applicant = class_applicant_signup.objects.get(email=email, contact=phone_number)
+            # Generate OTP and send it via SMS
+            otp = generate_otp()
+            success, message_info = send_otp_via_sms(phone_number, otp)
+            # Store the OTP in session to verify later
+            if success:
+                request.session['otp'] = otp
+                request.session['reset_email'] = email  # Storing email for password reset
+                return render(request, 'verify_otp.html')  # Render a page to verify OTP
+            else:
+                print(f"Failed to send OTP via Twilio: {message_info}")
+        except class_applicant.DoesNotExist:
+            pass
+
+        try:
+            company = company_signup.objects.get(company_email=email, company_contact=phone_number)
+            # Generate OTP and send it via SMS
+            otp = generate_otp()
+            data = send_otp_via_sms(phone_number, otp)
+
+            print(data[1])
+            # Store the OTP in session to verify later
+            request.session['otp'] = otp
+            request.session['reset_email'] = email  # Storing email for password reset
+            return render(request, 'verify_otp.html')  # Render a page to verify OTP
+        except company_signup.DoesNotExist:
+            pass
+
+    return render(request, 'forgot_password.html')  # Render the initial forgot password page
 
 
 
@@ -76,6 +142,7 @@ def jobseeker_login(requests):
 
                 else:
                     print("user not exists")
+                    return render(requests, 'main_page.html', {"status": "invalid"})
             else:
                 jobseeker_username = requests.POST.get('usrname')
                 jobseeker_password = requests.POST.get('passwrd')
@@ -84,15 +151,19 @@ def jobseeker_login(requests):
                                                               password=jobseeker_password).values()
                 print(check)
                 if check:
-                    requests.session['jobseeker_id'] = jobseeker_username
-                    print("user exists")
-                    applicant = class_applicant_signup.objects.filter(email=jobseeker_username)
-                    for i in applicant:
-                        b = i.name
-                    return render(requests, 'jobseeker_home.html', {'applicant_name': b})
+                    if class_applicant_signup.objects.filter(email=jobseeker_username, status="Active").values():
+                        requests.session['jobseeker_id'] = jobseeker_username
+                        print("user exists")
+                        applicant = class_applicant_signup.objects.filter(email=jobseeker_username)
+                        for i in applicant:
+                            b = i.name
+                        return render(requests, 'jobseeker_home.html', {'applicant_name': b})
+                    else:
+                        return render(requests, 'main_page.html', {"status": "inactive"})
 
                 else:
                     print("user not exists")
+                    return render(requests, 'main_page.html', {"status": "invalid"})
         else:
             print(requests.POST.get("optradio"))
             if requests.POST.get("optradio") == "hr":
@@ -154,7 +225,8 @@ def job_listing_fn(requests):
                 joblist = job_posting.objects.filter(joblist_condition)
                 print(joblist)
             else:
-                joblist = job_posting.objects.all()
+                today = date.today()
+                joblist = job_posting.objects.filter(job_closing__gte=today)
         return render(requests, 'joblisting.html', {'job_list': joblist, 'applicant_name': b})
     else:
         return redirect('/login')

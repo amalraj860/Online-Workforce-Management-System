@@ -136,3 +136,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Twilio configuration for OTP generation
+TWILIO_ACCOUNT_SID = 'ACe2069701b9dd71d4b438537bf5116ca5'
+TWILIO_AUTH_TOKEN = 'b8650676e1be93eff253f9bb4c660493'
+TWILIO_PHONE_NUMBER = '+918606670730'

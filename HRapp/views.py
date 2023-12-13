@@ -36,6 +36,7 @@ def hr_signup(requests):
 
 # hr login page
 def hr_login(requests):
+    print("hr login")
     if requests.method == "POST":
         hr_username = requests.POST.get('usrname')
         hr_password = requests.POST.get('passwrd')
@@ -43,11 +44,15 @@ def hr_login(requests):
         checking = company_signup.objects.filter(company_email=hr_username, company_password=hr_password).values()
         print(checking)
         if checking:
-            requests.session['hr_id'] = hr_username
-            print("user exists")
-            return render(requests, 'hr_home.html')
+            if company_signup.objects.filter(company_email=hr_username, status="Active").values():
+                requests.session['hr_id'] = hr_username
+                print("user exists")
+                return render(requests, 'hr_home.html')
+            else:
+                return render(requests, 'main_page.html',{"status":"inactive"})
+
         else:
-            print("user not exists")
+            return render(requests, 'main_page.html',{"status":"invalid"})
     return render(requests, 'main_page.html')
 
 
@@ -144,7 +149,7 @@ def view_the_applied_candidate_fn(requests, id):
 
 # HR profile updation
 
-def hr_profile_updation_fn(requests,id):
+def hr_profile_updation_fn(requests):
     if 'hr_id' in requests.session:
         company_email = requests.session['hr_id']
         data = company_signup.objects.filter(company_email=company_email)
@@ -152,7 +157,7 @@ def hr_profile_updation_fn(requests,id):
             a = x.company_name
             Id = x.id
         if requests.method == "POST":
-            company_info = company_signup.objects.get(id=id)
+            company_info = company_signup.objects.get(id=Id)
             company_info.company_name = requests.POST.get("companyname")
             company_info.company_address = requests.POST.get("companyaddress")
             company_info.company_email = requests.POST.get("companyemail")

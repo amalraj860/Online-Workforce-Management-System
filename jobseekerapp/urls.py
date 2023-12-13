@@ -16,4 +16,5 @@ urlpatterns = [
     path('application_history', views.application_history_fn, name='job_applied_history'),
     path('appplicant_profile_update', views.job_seeker_profile_updation_fn, name='applicant_profile_updation'),
     path('signup', views.job_seeker_signup, name='signup_signup'),
+    path('forgot_password/',views.forgot_password,name='forgotten_password')
 ]

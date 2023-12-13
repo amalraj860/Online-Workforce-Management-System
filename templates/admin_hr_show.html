@@ -10,24 +10,24 @@
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Address</th>
         <th>Email</th>
         <th>Contact</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-    {% for hr_dtls in hr_updates %}
+    {% for hr_dtls in hr %}
       <tr>
         <td>{{hr_dtls.id}}</td>
         <td>{{hr_dtls.company_name }}</td>
-        <td>{{hr_dtls.company_address}}</td>
         <td>{{hr_dtls.company_email}}</td>
         <td>{{hr_dtls.company_contact}}</td>
+        <td>{{hr_dtls.status}}</td>
         <td>
           <a href="hr_update/{{hr_dtls.id}}" class="btn btn-success">UPDATE</a>
-          <a href="jobview/{{hr_dtls.id}}" class="btn btn-success">VIEW</a>
-          <a href="delete/{{hr_dtls.id}}" class="btn btn-danger">DELETE</a>
+          <a href="job_posting/{{hr_dtls.id}}" class="btn btn-success">VIEW</a>
+          <a href="hr_delete/{{hr_dtls.id}}" class="btn btn-danger">DELETE</a>
         </td>
       </tr>
     {% endfor %}
